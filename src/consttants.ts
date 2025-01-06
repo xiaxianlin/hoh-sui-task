@@ -1,0 +1,2 @@
+export const APP_ADDERSS =
+  "0xa7e7b2edffed500eae325a05cc2b36180e9aae1934710e247b4f965ed9437482";
