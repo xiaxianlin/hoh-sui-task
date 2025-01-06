@@ -1,46 +1,22 @@
-import { ConnectButton } from "@mysten/dapp-kit";
-import { Box, Container, Flex, Heading, Tabs } from "@radix-ui/themes";
-import { WalletStatus } from "./WalletStatus";
+import Account from "./routes/account";
+import Home from "./routes/home";
+import Root from "./routes/root";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Task1 from "./routes/task1";
+import { AppModel } from "./models/app_model";
 
-function App() {
+export default function App() {
   return (
-    <>
-      <Flex
-        position="sticky"
-        px="4"
-        py="2"
-        justify="between"
-        style={{ borderBottom: "1px solid var(--gray-a2)" }}
-      >
-        <Box>
-          <Heading>Profiles</Heading>
-        </Box>
-        <Box>
-          <Tabs.Root defaultValue="account">
-            <Tabs.List>
-              <Tabs.Trigger value="account">Account</Tabs.Trigger>
-              <Tabs.Trigger value="documents">Documents</Tabs.Trigger>
-              <Tabs.Trigger value="settings">Settings</Tabs.Trigger>
-            </Tabs.List>
-          </Tabs.Root>
-        </Box>
-
-        <Box>
-          <ConnectButton />
-        </Box>
-      </Flex>
-      <Container>
-        <Container
-          mt="5"
-          pt="2"
-          px="4"
-          style={{ background: "var(--gray-a2)", minHeight: 500 }}
-        >
-          <WalletStatus />
-        </Container>
-      </Container>
-    </>
+    <AppModel.Provider>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Root />}>
+            <Route index element={<Home />} />
+            <Route path="account" element={<Account />} />
+            <Route path="task1" element={<Task1 />} />
+          </Route>
+        </Routes>
+      </BrowserRouter>
+    </AppModel.Provider>
   );
 }
-
-export default App;
