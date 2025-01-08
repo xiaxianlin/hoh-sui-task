@@ -7,16 +7,19 @@ import { useConfigModel } from "../models/config.model";
 const items = [
   { key: "/", label: "Home" },
   { key: "/account", label: "Account" },
+  { key: "/faucet", label: "Faucet" },
+  { key: "/transfer", label: "Transfer" },
   { key: "/task", label: "Task" },
 ];
 
 export default function Root() {
   const navigate = useNavigate();
   const location = useLocation();
-  const { account, loading } = useAppModel();
+  const { account } = useAppModel();
   const { env, setEnv } = useConfigModel();
+
   return (
-    <Layout className="App">
+    <Layout className="Root" key={env}>
       <Layout.Header
         style={{
           position: "sticky",
@@ -32,7 +35,9 @@ export default function Root() {
         <Menu
           theme="dark"
           mode="horizontal"
-          items={items}
+          items={items.filter((i) =>
+            env === "mainnet" ? i.key !== "/faucet" : true,
+          )}
           selectedKeys={[location.pathname]}
           style={{ flex: 1, minWidth: 0 }}
           onSelect={({ key }) => navigate(key)}
@@ -52,11 +57,7 @@ export default function Root() {
         </div>
       </Layout.Header>
       <Layout.Content style={{ padding: 24, height: "calc(100vh - 64px)" }}>
-        {loading ? (
-          <Flex align="center" justify="center">
-            <Spin spinning />
-          </Flex>
-        ) : account ? (
+        {account ? (
           <Outlet />
         ) : (
           <Flex align="center" justify="center">

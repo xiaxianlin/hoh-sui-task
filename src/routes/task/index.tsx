@@ -1,38 +1,38 @@
-import { useCurrentAccount, useSuiClientQuery } from "@mysten/dapp-kit";
-import { Card, Spin } from "antd";
-import { useMemo } from "react";
+import { useSuiClientQuery } from "@mysten/dapp-kit";
+import { Alert, Card, Spin } from "antd";
 import { TASK_SHARE_STATE_ID } from "../../constants";
 import CreateProfile from "./components/create-profile";
-import ProfileInfo from "./components/profile-info";
 
 export default function Task() {
-  const account = useCurrentAccount();
-  const { data, isPending, refetch } = useSuiClientQuery("getObject", {
+  const { data, isPending, refetch, error } = useSuiClientQuery("getObject", {
     id: TASK_SHARE_STATE_ID,
     options: {
       showContent: true,
     },
   });
 
-  const isCreated = useMemo(() => {
-    const content = data?.data?.content as any;
-    const users = content?.fields?.users || [];
-    return users.includes(account?.address);
-  }, [data, account]);
+  if (isPending) {
+    return (
+      <Card title="Profle" style={{ width: "50%", margin: "0 auto" }}>
+        <Spin spinning />
+      </Card>
+    );
+  }
+
+  const isError = !!error || !!data.error;
 
   return (
     <Card title="Profle" style={{ width: "50%", margin: "0 auto" }}>
-      {isPending ? (
-        <Spin spinning />
-      ) : (
-        <>
-          {isCreated ? (
-            <ProfileInfo />
-          ) : (
-            <CreateProfile onCreate={() => refetch()} />
-          )}
-        </>
-      )}
+      <Alert
+        showIcon
+        type="error"
+        message={TASK_SHARE_STATE_ID + " " + data?.error?.code}
+        style={{ marginBottom: 20 }}
+      />
+      <CreateProfile
+        onCreate={() => refetch()}
+        disabled={isPending || isError}
+      />
     </Card>
   );
 }

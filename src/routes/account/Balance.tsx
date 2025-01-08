@@ -1,22 +1,15 @@
-import { useCurrentAccount, useSuiClientQuery } from "@mysten/dapp-kit";
-import { MIST_PER_SUI } from "@mysten/sui/utils";
+import { useSuiClientQuery } from "@mysten/dapp-kit";
 import { Card, Flex } from "antd";
-
-const balance = (balance: string) => {
-  return Number.parseInt(balance) / Number(MIST_PER_SUI);
-};
+import { useAppModel } from "../../models/app.model";
+import { balance } from "../../utils/format";
 
 export function Balance() {
-  const account = useCurrentAccount();
+  const { address } = useAppModel();
   const { data, isPending, error } = useSuiClientQuery(
     "getBalance",
-    { owner: account?.address as string },
-    { enabled: !!account },
+    { owner: address },
+    { enabled: !!address },
   );
-
-  if (!account) {
-    return;
-  }
 
   if (error) {
     return <Flex>Error: {error.message}</Flex>;

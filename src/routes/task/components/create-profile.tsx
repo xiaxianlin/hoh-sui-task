@@ -10,7 +10,9 @@ type FieldType = {
 
 export default function CreateProfile({
   onCreate,
+  disabled,
 }: {
+  disabled?: boolean;
   onCreate?: (digest?: string) => void;
 }) {
   const { mutate } = useSignAndExecuteTransaction();
@@ -39,7 +41,13 @@ export default function CreateProfile({
     );
   };
   return (
-    <Form size="large" layout="vertical" onFinish={onFinish} autoComplete="off">
+    <Form
+      size="large"
+      layout="vertical"
+      onFinish={onFinish}
+      autoComplete="off"
+      disabled={disabled}
+    >
       <Form.Item<FieldType>
         label="Name"
         name="name"

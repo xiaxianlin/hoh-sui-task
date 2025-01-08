@@ -4,5 +4,6 @@ export const TASK_PACKAGE_ID =
 export const TASK_SHARE_STATE_ID =
   "0xa244d7a4c2aed3111a7e97bcfd714193521830e5cd7868ae53c190a14f1cc65f";
 
+// Define the USDC token type on Sui Testnet
 export const USDC_TYPE =
-  "0x48f21c934406ce940fe743347c58b7f6392b08a03e2c22ebd3ec5d3fdfba65cc";
+  "0xa1ec7fc00a6f40db9693ad1415d0c193ad3906494428cf252621037bd7117e29::usdc::USDC";

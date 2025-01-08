@@ -24,10 +24,10 @@ const ClientContainer = () => {
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
-    <ConfigModel.Provider>
-      <ConfigProvider theme={{ algorithm: theme.darkAlgorithm }}>
+    <ConfigProvider theme={{ algorithm: theme.darkAlgorithm }}>
+      <ConfigModel.Provider>
         <ClientContainer />
-      </ConfigProvider>
-    </ConfigModel.Provider>
+      </ConfigModel.Provider>
+    </ConfigProvider>
   </React.StrictMode>,
 );
