@@ -1,5 +1,5 @@
 import { ConnectButton } from "@mysten/dapp-kit";
-import { Flex, Layout, Menu, Select, Spin } from "antd";
+import { Flex, Layout, Menu, Select } from "antd";
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import { useAppModel } from "../models/app.model";
 import { useConfigModel } from "../models/config.model";
