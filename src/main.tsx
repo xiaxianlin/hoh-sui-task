@@ -1,24 +1,33 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import "@mysten/dapp-kit/dist/index.css";
 import { SuiClientProvider, WalletProvider } from "@mysten/dapp-kit";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { QueryClientProvider } from "@tanstack/react-query";
 import App from "./App.tsx";
-import { networkConfig } from "./networkConfig.ts";
 import { ConfigProvider, theme } from "antd";
+import { ConfigModel, useConfigModel } from "./models/config.model.ts";
 
-const queryClient = new QueryClient();
+import "@mysten/dapp-kit/dist/index.css";
+import "./index.less";
+
+const ClientContainer = () => {
+  const { env, config, client } = useConfigModel();
+  return (
+    <QueryClientProvider client={client}>
+      <SuiClientProvider networks={config.networkConfig} network={env}>
+        <WalletProvider autoConnect>
+          <App />
+        </WalletProvider>
+      </SuiClientProvider>
+    </QueryClientProvider>
+  );
+};
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
-    <ConfigProvider theme={{ algorithm: theme.darkAlgorithm }}>
-      <QueryClientProvider client={queryClient}>
-        <SuiClientProvider networks={networkConfig} defaultNetwork="devnet">
-          <WalletProvider autoConnect>
-            <App />
-          </WalletProvider>
-        </SuiClientProvider>
-      </QueryClientProvider>
-    </ConfigProvider>
+    <ConfigModel.Provider>
+      <ConfigProvider theme={{ algorithm: theme.darkAlgorithm }}>
+        <ClientContainer />
+      </ConfigProvider>
+    </ConfigModel.Provider>
   </React.StrictMode>,
 );

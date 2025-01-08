@@ -1,20 +1,22 @@
 import { ConnectButton } from "@mysten/dapp-kit";
-import { Flex, Layout, Menu, Spin } from "antd";
+import { Flex, Layout, Menu, Select, Spin } from "antd";
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
-import { useAppModel } from "../models/app_model";
+import { useAppModel } from "../models/app.model";
+import { useConfigModel } from "../models/config.model";
 
 const items = [
   { key: "/", label: "Home" },
   { key: "/account", label: "Account" },
-  { key: "/task1", label: "Task1" },
+  { key: "/task", label: "Task" },
 ];
 
 export default function Root() {
   const navigate = useNavigate();
   const location = useLocation();
   const { account, loading } = useAppModel();
+  const { env, setEnv } = useConfigModel();
   return (
-    <Layout>
+    <Layout className="App">
       <Layout.Header
         style={{
           position: "sticky",
@@ -35,7 +37,19 @@ export default function Root() {
           style={{ flex: 1, minWidth: 0 }}
           onSelect={({ key }) => navigate(key)}
         />
-        <ConnectButton />
+        <Select
+          value={env}
+          onChange={setEnv}
+          size="large"
+          style={{ marginRight: 12 }}
+        >
+          <Select.Option value="devnet">devnet</Select.Option>
+          <Select.Option value="testnet">testnet</Select.Option>
+          <Select.Option value="mainnet">mainnet</Select.Option>
+        </Select>
+        <div className="custom-connect-button">
+          <ConnectButton />
+        </div>
       </Layout.Header>
       <Layout.Content style={{ padding: 24, height: "calc(100vh - 64px)" }}>
         {loading ? (

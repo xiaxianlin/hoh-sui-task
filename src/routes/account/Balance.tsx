@@ -25,7 +25,6 @@ export function Balance() {
   if (isPending || !data) {
     return <Flex>Loading...</Flex>;
   }
-  MIST_PER_SUI;
 
   return (
     <Card size="small" title="Balance">

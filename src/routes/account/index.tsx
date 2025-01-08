@@ -1,7 +1,7 @@
 import { Balance } from "./Balance";
 import { getFullnodeUrl } from "@mysten/sui/client";
 import { Card, Flex } from "antd";
-import { useAppModel } from "../../models/app_model";
+import { useAppModel } from "../../models/app.model";
 
 export default function Account() {
   const { account, objects } = useAppModel();
