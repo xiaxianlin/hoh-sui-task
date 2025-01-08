@@ -11,6 +11,8 @@ export default function Task() {
     },
   });
 
+  console.log(data);
+
   if (isPending) {
     return (
       <Card title="Profle" style={{ width: "50%", margin: "0 auto" }}>
@@ -23,12 +25,14 @@ export default function Task() {
 
   return (
     <Card title="Profle" style={{ width: "50%", margin: "0 auto" }}>
-      <Alert
-        showIcon
-        type="error"
-        message={TASK_SHARE_STATE_ID + " " + data?.error?.code}
-        style={{ marginBottom: 20 }}
-      />
+      {isError && (
+        <Alert
+          showIcon
+          type="error"
+          message={TASK_SHARE_STATE_ID + " " + data?.error?.code}
+          style={{ marginBottom: 20 }}
+        />
+      )}
       <CreateProfile
         onCreate={() => refetch()}
         disabled={isPending || isError}
