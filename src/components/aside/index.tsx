@@ -1,7 +1,7 @@
 import "./index.less";
 import { Layout, Menu, MenuProps } from "antd";
 import { useConfigModel } from "../../models/config.model";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useMemo } from "react";
 import {
   AccountBookOutlined,
@@ -10,6 +10,7 @@ import {
   GiftOutlined,
   HomeOutlined,
   SnippetsOutlined,
+  SwapOutlined,
   TransactionOutlined,
 } from "@ant-design/icons";
 
@@ -26,18 +27,17 @@ const items: MenuItem[] = [
     icon: <GiftOutlined />,
     children: [
       { key: "/counter", label: "Counter", icon: <FieldNumberOutlined /> },
+      { key: "/swap", label: "Swap", icon: <SwapOutlined /> },
     ],
   },
 ];
 
-export default function Aside() {
+export function Aside() {
   const navigate = useNavigate();
+  const location = useLocation();
   const { env } = useConfigModel();
-  const options = useMemo(
-    () =>
-      items.filter((i) => (env === "mainnet" ? i?.key !== "/faucet" : true)),
-    [env],
-  );
+  const options = useMemo(() => items.filter((i) => (env === "mainnet" ? i?.key !== "/faucet" : true)), [env]);
+  const selectKey = location.pathname.split("/")[1];
   return (
     <Layout.Sider>
       <h1 className="logo">HOH-SUI</h1>
@@ -45,8 +45,8 @@ export default function Aside() {
         theme="dark"
         items={options}
         mode="inline"
+        selectedKeys={["/" + selectKey]}
         defaultOpenKeys={["/examples"]}
-        selectedKeys={[location.pathname]}
         style={{ flex: 1, minWidth: 0 }}
         onSelect={({ key }) => navigate(key)}
       />

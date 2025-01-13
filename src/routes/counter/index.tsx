@@ -1,10 +1,10 @@
 import { Button, Card, Flex } from "antd";
 import { useState } from "react";
 import { useSignAndExecuteTransaction, useSuiClient, useSuiClientQuery } from "@mysten/dapp-kit";
-import QueryContainer from "../../components/query-container";
+import { QueryContainer } from "@/components";
 import { Transaction } from "@mysten/sui/transactions";
-import { getCounterFields } from "../../utils/format";
-import { useAppModel } from "../../models/app.model";
+import { getCounterFields } from "@/utils/format";
+import { useAppModel } from "@/models/app.model";
 
 const STORAGE_KEY = "HOH_SUI_COUNTER_ID";
 const PACKAGE_ID = "0xd9ea21ae028ed8ec6fee48c96780272dfa1dfe7cea8803038b0c4e9b2ad31ea4";

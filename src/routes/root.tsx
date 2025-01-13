@@ -3,7 +3,7 @@ import { Flex, Layout, Select, theme } from "antd";
 import { Outlet } from "react-router-dom";
 import { useAppModel } from "../models/app.model";
 import { useConfigModel } from "../models/config.model";
-import Aside from "../components/aside";
+import { Aside } from "@/components/aside";
 
 export default function Root() {
   const { account } = useAppModel();
@@ -24,12 +24,7 @@ export default function Root() {
             alignItems: "center",
           }}
         >
-          <Select
-            value={env}
-            onChange={setEnv}
-            size="large"
-            style={{ marginRight: 12 }}
-          >
+          <Select value={env} onChange={setEnv} size="large" style={{ marginRight: 12 }}>
             <Select.Option value="devnet">devnet</Select.Option>
             <Select.Option value="testnet">testnet</Select.Option>
             <Select.Option value="mainnet">mainnet</Select.Option>

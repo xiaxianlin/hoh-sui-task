@@ -3,7 +3,7 @@ import { UseQueryResult } from "@tanstack/react-query";
 import { Spin, Typography } from "antd";
 import { ReactNode } from "react";
 
-export default function QueryContainer({
+export function QueryContainer({
   query,
   children,
 }: {

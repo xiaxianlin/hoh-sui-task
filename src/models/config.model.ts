@@ -1,12 +1,13 @@
 import { createContainer } from "unstated-next";
-import { getFullnodeUrl } from "@mysten/sui/client";
+import { getFullnodeUrl, SuiClient } from "@mysten/sui/client";
 import { createNetworkConfig } from "@mysten/dapp-kit";
 import { useMemo, useState } from "react";
 import { QueryClient } from "@tanstack/react-query";
 
 const useContainer = () => {
   const [env, setEnv] = useState<"devnet" | "testnet" | "mainnet">("testnet");
-  const client = useMemo(() => new QueryClient(), []);
+  const queryClient = useMemo(() => new QueryClient(), []);
+
   const config = useMemo(
     () =>
       createNetworkConfig({
@@ -17,10 +18,13 @@ const useContainer = () => {
     [],
   );
 
+  const client = useMemo(() => new SuiClient({ url: getFullnodeUrl(env) }), [env]);
+
   return {
     env,
     config,
     client,
+    queryClient,
     setEnv,
   };
 };

@@ -10,9 +10,9 @@ import "@mysten/dapp-kit/dist/index.css";
 import "./index.less";
 
 const ClientContainer = () => {
-  const { env, config, client } = useConfigModel();
+  const { env, config, queryClient } = useConfigModel();
   return (
-    <QueryClientProvider client={client}>
+    <QueryClientProvider client={queryClient}>
       <SuiClientProvider networks={config.networkConfig} network={env}>
         <WalletProvider autoConnect>
           <App />
