@@ -22,23 +22,23 @@ export function Locked({ locked, hideControls }: { locked: ILocked; hideControls
     if (locked.deleted) return "Deleted";
     if (hideControls) {
       if (locked.creator === address) return "You offer this";
-      return "You'll receive this if accepted";
+      return "You'll receive if accepted";
     }
     return undefined;
   };
 
-  const getLabelClasses = () => {
-    if (locked.deleted) return "bg-red-50 rounded px-3 py-1 text-sm text-red-500";
+  const getLabelColor = () => {
+    if (locked.deleted) return "error";
     if (hideControls) {
-      if (!!locked.creator && locked.creator === address) return "bg-blue-50 rounded px-3 py-1 text-sm text-blue-500";
-      return "bg-green-50 rounded px-3 py-1 text-sm text-green-700";
+      if (!!locked.creator && locked.creator === address) return "processing";
+      return "success";
     }
     return undefined;
   };
 
   return (
-    <SuiObjectDisplay object={suiObject?.data?.data!} label={getLabel()} labelClasses={getLabelClasses()}>
-      <Flex align="center" justify="space-between" className="pb-1">
+    <SuiObjectDisplay object={suiObject?.data?.data!} label={getLabel()} color={getLabelColor()}>
+      <Flex align="center" justify="space-between">
         <ExplorerLink id={locked.objectId} isAddress={false} />
         {!hideControls && isOwner() && (
           <Button
@@ -66,12 +66,8 @@ export function Locked({ locked, hideControls }: { locked: ILocked; hideControls
             Start Escrow
           </Button>
         )}
-        {isToggled && (
-          <div className="min-w-[340px] w-full justify-self-start text-left">
-            <CreateEscrow locked={locked} />
-          </div>
-        )}
       </Flex>
+      {isToggled && <CreateEscrow locked={locked} />}
     </SuiObjectDisplay>
   );
 }

@@ -1,12 +1,8 @@
 import { db, Escrow } from "./db";
 
 export type EscrowListingQuery = {
-  escrowId?: string;
   sender?: string;
   recipient?: string;
-  cancelled?: string;
-  swapped?: string;
-  limit?: string;
 };
 
 export const saveEscrow = async (escrow: Escrow) => {
@@ -18,9 +14,10 @@ export const saveEscrow = async (escrow: Escrow) => {
   }
 };
 
-export const queryEscrow = async ({}: EscrowListingQuery & { cursor?: string; objectId?: string }): Promise<{
-  cursor?: string;
-  data: Escrow[];
-}> => {
-  return { cursor: "", data: await db.escrow.toArray() };
+export const queryRequestedEscrows = async (address: string) => {
+  return db.escrow.filter((e) => !e.cancelled && !!e.swapped && e.recipient === address).toArray();
+};
+
+export const queryPendingEscrows = async (address: string) => {
+  return db.escrow.filter((e) => !e.cancelled && !e.swapped && e.sender === address).toArray();
 };

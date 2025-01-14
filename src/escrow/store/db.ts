@@ -32,7 +32,13 @@ export const db = new Dexie("escrow") as Dexie & {
 };
 
 db.version(2).stores({
-  locked: "++id, objectId, deleted",
+  locked: "++id, objectId, keyId",
   escrow: "++id, objectId",
   cursor: "id",
 });
+
+export const reset = async () => {
+  await db.locked.clear();
+  await db.cursor.clear();
+  await db.escrow.clear();
+};

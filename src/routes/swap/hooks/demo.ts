@@ -5,7 +5,7 @@ import { useAppModel } from "@/models/app.model";
 import { ESCROW_PACKAGE_ID } from "@/constants";
 import { QueryKey } from "../constants";
 
-export function useGenerateDemoData() {
+export function useGenerateDemoData({ onSuccess }: { onSuccess?: () => void }) {
   const { address } = useAppModel();
   const executeTransaction = useTransactionExecution();
   const queryClient = useQueryClient();
@@ -25,6 +25,7 @@ export function useGenerateDemoData() {
       return executeTransaction(txb);
     },
     onSuccess: () => {
+      onSuccess?.();
       queryClient.invalidateQueries({ queryKey: [QueryKey.GetOwnedObjects] });
     },
   });

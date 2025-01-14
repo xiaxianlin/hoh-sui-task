@@ -1,21 +1,13 @@
-import { startListeners, stopListeners } from "@/escrow/indexer/event-indexer";
-import { useConfigModel } from "@/models/config.model";
 import { Button, Flex, Radio } from "antd";
-import { useEffect } from "react";
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import { useGenerateDemoData } from "./hooks/demo";
+import { useState } from "react";
 
 export default function SwapRoot() {
+  const [id, setId] = useState(1);
   const location = useLocation();
   const navigate = useNavigate();
-  const { client } = useConfigModel();
-  const { mutate: demoBearMutation, isPending } = useGenerateDemoData();
-
-  useEffect(() => {
-    console.log("startListeners");
-    startListeners(client);
-    return () => stopListeners();
-  }, []);
+  const { mutate: demoBearMutation, isPending } = useGenerateDemoData({ onSuccess: () => setId(Math.random()) });
 
   return (
     <Flex vertical>
@@ -28,7 +20,7 @@ export default function SwapRoot() {
           New Demo Bear
         </Button>
       </Flex>
-      <Outlet />
+      <Outlet key={id} />
     </Flex>
   );
 }

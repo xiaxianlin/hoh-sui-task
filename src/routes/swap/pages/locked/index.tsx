@@ -1,18 +1,18 @@
 import { Tabs, TabsProps } from "antd";
 import { useMemo } from "react";
-import { OwnedLockedList } from "../../components/OwnedLockedList";
+import { MyLockedObejcts } from "../../components/MyLockedObejcts";
 import { LockOwnedObjects } from "../../components/LockOwnedObjects";
 
 export default function Locked() {
   const items = useMemo<TabsProps["items"]>(() => {
     return [
       {
-        key: "my",
+        key: "1",
         label: "My Locked Objects",
-        children: <OwnedLockedList />,
+        children: <MyLockedObejcts />,
       },
       {
-        key: "owned",
+        key: "2",
         label: "Lock Owned objects",
         children: <LockOwnedObjects />,
       },

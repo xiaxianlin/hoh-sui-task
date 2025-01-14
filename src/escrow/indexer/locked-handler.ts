@@ -23,14 +23,13 @@ export const handleLockObjects = async (events: SuiEvent[], type: string) => {
       updates[data.lock_id] = { objectId: data.lock_id };
     }
 
-    if (isDeletionEvent) {
-      updates[data.lock_id].deleted = true;
-    }
-
     updates[data.lock_id].keyId = data.key_id;
     updates[data.lock_id].creator = data.creator;
     updates[data.lock_id].itemId = data.item_id;
+    updates[data.lock_id].deleted = isDeletionEvent;
   }
+
+  console.log("handleLockObjects", updates);
 
   await Promise.all(Object.keys(updates).map((key) => saveLocked(updates[key])));
 };

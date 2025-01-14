@@ -25,21 +25,21 @@ export default function Escrows() {
       {
         key: "1",
         label: <TabeLabel label="Requested Escrows" tooltip="Escrows requested for your locked objects." />,
-        children: <EscrowList params={{ recipient: address, swapped: "false", cancelled: "false" }} />,
+        children: <EscrowList address={address} swaped />,
       },
       {
         key: "2",
         label: <TabeLabel label="Browse Locked Objects" tooltip="Browse locked objects you can trade for." />,
-        children: <LockedList params={{ deleted: "false" }} />,
+        children: <LockedList params={{ deleted: false }} />,
       },
       {
         key: "3",
         label: (
           <TabeLabel label="My Pending Requests" tooltip="Escrows you have initiated for third party locked objects." />
         ),
-        children: <EscrowList params={{ sender: address, swapped: "false", cancelled: "false" }} />,
+        children: <EscrowList address={address} />,
       },
     ];
   }, [address]);
-  return <Tabs defaultActiveKey="my" items={items} />;
+  return <Tabs defaultActiveKey="my" destroyInactiveTabPane items={items} />;
 }

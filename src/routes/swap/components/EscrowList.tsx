@@ -1,44 +1,19 @@
-// Copyright (c) Mysten Labs, Inc.
-// SPDX-License-Identifier: Apache-2.0
-
-import { useInfiniteQuery } from "@tanstack/react-query";
 import { Escrow } from "./Escrow";
 import { InfiniteScrollArea } from "@/components";
-import { useState } from "react";
-import { Input } from "antd";
-import { QueryKey } from "../constants";
-import { EscrowListingQuery, queryEscrow } from "@/escrow/store/escrow";
 import { Escrow as IEscrow } from "@/escrow/store/db";
+import { queryPendingEscrows, queryRequestedEscrows } from "@/escrow/store/escrow";
+import { useInfiniteScroll } from "ahooks";
 
-export function EscrowList({ params, enableSearch }: { params: EscrowListingQuery; enableSearch?: boolean }) {
-  const [escrowId, setEscrowId] = useState("");
+export function EscrowList({ address, swaped }: { address: string; swaped?: boolean }) {
+  const { data, loading, loadingMore, loadMore } = useInfiniteScroll(async () => {
+    const data = swaped ? await queryRequestedEscrows(address) : await queryPendingEscrows(address);
 
-  const { data, fetchNextPage, hasNextPage, isLoading, isFetchingNextPage } = useInfiniteQuery({
-    initialPageParam: "",
-    queryKey: [QueryKey.Escrow, params, escrowId],
-    queryFn: async ({ pageParam }) => {
-      return queryEscrow({
-        ...params,
-        ...(pageParam ? { cursor: pageParam as string } : {}),
-        ...(escrowId ? { objectId: escrowId } : {}),
-      });
-    },
-    select: (data) => data.pages.flatMap((page) => page.data),
-    getNextPageParam: (lastPage) => lastPage.cursor,
+    return { hasMore: false, list: data };
   });
 
   return (
-    <div>
-      {enableSearch && (
-        <Input placeholder="Search by escrow id" value={escrowId} onChange={(e) => setEscrowId(e.target.value)} />
-      )}
-      <InfiniteScrollArea
-        loadMore={() => fetchNextPage()}
-        hasNextPage={hasNextPage}
-        loading={isFetchingNextPage || isLoading}
-      >
-        {data?.map((escrow: IEscrow) => <Escrow key={escrow.itemId} escrow={escrow} />)}
-      </InfiniteScrollArea>
-    </div>
+    <InfiniteScrollArea loadMore={loadMore} hasNextPage={!!data?.hasMore} loading={loading || loadingMore}>
+      {data?.list.map((escrow: IEscrow) => <Escrow key={escrow.itemId} escrow={escrow} />)}
+    </InfiniteScrollArea>
   );
 }

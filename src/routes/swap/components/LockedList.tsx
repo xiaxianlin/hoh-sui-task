@@ -9,11 +9,14 @@ export function LockedList({ params }: { isPersonal?: boolean; params: LockedLis
   const suiClient = useSuiClient();
 
   const { data, loading, loadingMore, loadMore } = useInfiniteScroll(async () => {
-    const { data } = await queryLocked({ deleted: "false", ...params });
-    const objects = await suiClient.multiGetObjects({
-      ids: data.map((x: Locked) => x.objectId),
-      options: { showOwner: true, showContent: true },
-    });
+    const data = await queryLocked({ deleted: false, ...params });
+
+    const objects = data.length
+      ? await suiClient.multiGetObjects({
+          ids: data.map((x: Locked) => x.objectId),
+          options: { showOwner: true, showContent: true },
+        })
+      : [];
     return { hasMore: false, list: objects.map((x) => x.data), data };
   });
 

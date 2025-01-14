@@ -3,6 +3,7 @@ import { ESCROW_PACKAGE_ID } from "../../constants";
 import { handleLockObjects } from "./locked-handler";
 import { handleEscrowObjects } from "./escrow-handler";
 import { getCursor, saveCursor } from "../store/cursor";
+import { reset } from "../store/db";
 
 const status = {
   start: false,
@@ -55,12 +56,10 @@ const executeEventJob = async (
       cursor,
       order: "ascending",
     });
-
     await tracker.callback(data, tracker.type);
 
     if (nextCursor && data.length > 0) {
       await saveCursor({ id: tracker.type, ...nextCursor });
-
       return { cursor: nextCursor, hasNextPage };
     }
   } catch (e) {
@@ -79,9 +78,10 @@ const runEventJob = async (client: SuiClient, tracker: EventTracker, cursor: Sui
 };
 
 export const startListeners = async (client: SuiClient) => {
+  await reset();
   status.start = true;
   for (const event of EVENTS_TO_TRACK) {
-    runEventJob(client, event, await getCursor(event.type));
+    executeEventJob(client, event, await getCursor(event.type));
   }
 };
 

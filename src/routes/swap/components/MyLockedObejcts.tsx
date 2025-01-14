@@ -4,7 +4,7 @@ import { CONSTRACT } from "../constants";
 import { InfiniteScrollArea } from "@/components";
 import { useAppModel } from "@/models/app.model";
 
-export function OwnedLockedList() {
+export function MyLockedObejcts() {
   const { address } = useAppModel();
 
   const { data, isLoading, fetchNextPage, hasNextPage, isFetchingNextPage } = useSuiClientInfiniteQuery(
