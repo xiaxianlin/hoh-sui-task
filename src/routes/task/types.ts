@@ -7,6 +7,18 @@ export type ProfileCreatedData = {
 };
 
 export type Profile = {
+  id: {
+    id: ObjectId;
+  };
+  name: string;
+  description: string;
+  folders: string[];
+};
+
+export type Folder = {
+  id: {
+    id: ObjectId;
+  };
   name: string;
   description: string;
 };

@@ -6,25 +6,20 @@ import { TaskModel, useTaskModel } from "./model";
 function TaskContent() {
   const { loading } = useTaskModel();
 
-  if (loading) {
-    return (
-      <Flex justify="center" align="center" className="h-[50%]">
-        <Spin spinning />
-      </Flex>
-    );
-  }
   return (
-    <Flex vertical gap={20}>
-      <Row gutter={20}>
-        <Col span={12}>
-          <Profile />
-        </Col>
-        <Col span={12}>
-          <Folder />
-        </Col>
-      </Row>
-      <CoinList />
-    </Flex>
+    <Spin spinning={loading}>
+      <Flex vertical gap={20}>
+        <Row gutter={20}>
+          <Col span={12}>
+            <Profile />
+          </Col>
+          <Col span={12}>
+            <Folder />
+          </Col>
+        </Row>
+        <CoinList />
+      </Flex>
+    </Spin>
   );
 }
 

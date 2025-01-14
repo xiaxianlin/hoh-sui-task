@@ -7,8 +7,6 @@ import {
   AccountBookOutlined,
   ControlOutlined,
   FieldNumberOutlined,
-  GiftOutlined,
-  HomeOutlined,
   SnippetsOutlined,
   SwapOutlined,
   TransactionOutlined,
@@ -16,15 +14,21 @@ import {
 
 type MenuItem = Required<MenuProps>["items"][number];
 const items: MenuItem[] = [
-  { key: "/", label: "Home", icon: <HomeOutlined /> },
-  { key: "/account", label: "Account", icon: <AccountBookOutlined /> },
+  { key: "/", label: "Home", icon: <AccountBookOutlined /> },
   { key: "/task", label: "Task", icon: <SnippetsOutlined /> },
-  { key: "/faucet", label: "Faucet", icon: <ControlOutlined /> },
-  { key: "/transfer", label: "Transfer", icon: <TransactionOutlined /> },
+  {
+    key: "/demos",
+    label: "Demos",
+    type: "group",
+    children: [
+      { key: "/faucet", label: "Faucet", icon: <ControlOutlined /> },
+      { key: "/transfer", label: "Transfer", icon: <TransactionOutlined /> },
+    ],
+  },
   {
     key: "/examples",
     label: "Examples",
-    icon: <GiftOutlined />,
+    type: "group",
     children: [
       { key: "/counter", label: "Counter", icon: <FieldNumberOutlined /> },
       { key: "/swap", label: "Swap", icon: <SwapOutlined /> },
@@ -46,7 +50,6 @@ export function Aside() {
         items={options}
         mode="inline"
         selectedKeys={["/" + selectKey]}
-        defaultOpenKeys={["/examples"]}
         style={{ flex: 1, minWidth: 0 }}
         onSelect={({ key }) => navigate(key)}
       />

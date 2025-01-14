@@ -1,5 +1,4 @@
 import Account from "./routes/account";
-import Home from "./routes/home";
 import Root from "./routes/root";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import Task from "./routes/task";
@@ -17,8 +16,7 @@ export default function App() {
       <BrowserRouter>
         <Routes>
           <Route path="" element={<Root />}>
-            <Route index element={<Home />} />
-            <Route path="account" element={<Account />} />
+            <Route index element={<Account />} />
             <Route path="task" element={<Task />} />
             <Route path="transfer" element={<Transfer />} />
             <Route path="faucet" element={<Faucet />} />
