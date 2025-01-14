@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import ReactDOM from "react-dom/client";
 import { SuiClientProvider, WalletProvider } from "@mysten/dapp-kit";
 import { QueryClientProvider } from "@tanstack/react-query";
@@ -8,14 +8,10 @@ import { ConfigModel, useConfigModel } from "./models/config.model.ts";
 
 import "@mysten/dapp-kit/dist/index.css";
 import "./index.less";
-import { getFullnodeUrl, SuiClient } from "@mysten/sui/client";
-import { startListeners } from "@/escrow/indexer/event-indexer.ts";
 
 const ClientContainer = () => {
   const { env, config, queryClient } = useConfigModel();
-  useEffect(() => {
-    startListeners(new SuiClient({ url: getFullnodeUrl(env) }));
-  }, [env]);
+
   return (
     <QueryClientProvider client={queryClient}>
       <SuiClientProvider networks={config.networkConfig} network={env}>
