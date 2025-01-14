@@ -61,10 +61,7 @@ const executeEventJob = async (
     if (nextCursor && data.length > 0) {
       await saveCursor({ id: tracker.type, ...nextCursor });
 
-      return {
-        cursor: nextCursor,
-        hasNextPage,
-      };
+      return { cursor: nextCursor, hasNextPage };
     }
   } catch (e) {
     console.error(e);
@@ -78,7 +75,7 @@ const executeEventJob = async (
 const runEventJob = async (client: SuiClient, tracker: EventTracker, cursor: SuiEventsCursor) => {
   if (!status.start) return;
   const result = await executeEventJob(client, tracker, cursor);
-  setTimeout(() => runEventJob(client, tracker, cursor), result.hasNextPage ? 0 : 1000);
+  setTimeout(() => runEventJob(client, tracker, cursor), result.hasNextPage ? 10 : 3000);
 };
 
 export const startListeners = async (client: SuiClient) => {

@@ -35,7 +35,7 @@ export function useTransactionExecution() {
 export function useGetObject({ id }: { id?: string }) {
   return useSuiClientQuery(
     "getObject",
-    { id: id!, options: { showType: true, showOwner: true, showContent: true } },
+    { id: id!, options: { showType: true, showOwner: true, showContent: true, showDisplay: true } },
     { enabled: !!id },
   );
 }

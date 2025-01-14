@@ -22,5 +22,5 @@ export const queryEscrow = async ({}: EscrowListingQuery & { cursor?: string; ob
   cursor?: string;
   data: Escrow[];
 }> => {
-  return { cursor: "", data: [] };
+  return { cursor: "", data: await db.escrow.toArray() };
 };

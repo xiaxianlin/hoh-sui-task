@@ -21,10 +21,10 @@ export function ExplorerLink({ id, isAddress }: { id: string; isAddress?: boolea
 
   return (
     <Flex gap={8}>
-      {copied ? <CheckCircleOutlined /> : <CopyOutlined onClick={copy} style={{ cursor: "pointer" }} />}
       <a href={link} target="_blank" rel="noreferrer">
         {formatAddress(id)}
       </a>
+      {copied ? <CheckCircleOutlined /> : <CopyOutlined onClick={copy} style={{ cursor: "pointer" }} />}
     </Flex>
   );
 }

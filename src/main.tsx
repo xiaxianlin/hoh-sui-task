@@ -22,12 +22,25 @@ const ClientContainer = () => {
   );
 };
 
-ReactDOM.createRoot(document.getElementById("root")!).render(
-  <React.StrictMode>
+const Container = () => {
+  return (
     <ConfigProvider theme={{ algorithm: theme.darkAlgorithm }}>
       <ConfigModel.Provider>
         <ClientContainer />
       </ConfigModel.Provider>
     </ConfigProvider>
-  </React.StrictMode>,
+  );
+};
+
+// @ts-ignore
+const isDev = process.env.NODE_ENV === "development";
+
+ReactDOM.createRoot(document.getElementById("root")!).render(
+  isDev ? (
+    <Container />
+  ) : (
+    <React.StrictMode>
+      <Container />
+    </React.StrictMode>
+  ),
 );

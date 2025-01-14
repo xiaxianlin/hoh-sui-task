@@ -21,7 +21,7 @@ export function Escrow({ escrow }: { escrow: IEscrow }) {
   const lockedData = useQuery({
     queryKey: [QueryKey.Locked, escrow.keyId],
     queryFn: async () => queryLocked({ keyId: escrow.keyId }),
-    select: (data) => data[0],
+    select: (data) => data.data[0],
     enabled: !escrow.cancelled,
   });
 

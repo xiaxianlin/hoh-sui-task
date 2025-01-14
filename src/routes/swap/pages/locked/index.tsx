@@ -1,5 +1,7 @@
 import { Tabs, TabsProps } from "antd";
 import { useMemo } from "react";
+import { OwnedLockedList } from "../../components/OwnedLockedList";
+import { LockOwnedObjects } from "../../components/LockOwnedObjects";
 
 export default function Locked() {
   const items = useMemo<TabsProps["items"]>(() => {
@@ -7,12 +9,12 @@ export default function Locked() {
       {
         key: "my",
         label: "My Locked Objects",
-        children: <>123</>,
+        children: <OwnedLockedList />,
       },
       {
         key: "owned",
         label: "Lock Owned objects",
-        children: <>456</>,
+        children: <LockOwnedObjects />,
       },
     ];
   }, []);

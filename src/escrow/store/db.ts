@@ -31,8 +31,8 @@ export const db = new Dexie("escrow") as Dexie & {
   cursor: EntityTable<Cursor, "id">;
 };
 
-db.version(1).stores({
-  locked: "++id, objectId",
+db.version(2).stores({
+  locked: "++id, objectId, deleted",
   escrow: "++id, objectId",
   cursor: "id",
 });

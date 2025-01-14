@@ -3,7 +3,7 @@ import { Locked as ILocked } from "@/escrow/store/db";
 import { useGetObject, useUnlockMutation } from "../hooks";
 import { useAppModel } from "@/models/app.model";
 import { ExplorerLink, SuiObjectDisplay } from "@/components";
-import { Button } from "antd";
+import { Button, Flex } from "antd";
 import { ArrowDownOutlined, ArrowUpOutlined, UnlockOutlined } from "@ant-design/icons";
 import { CreateEscrow } from "./CreateEscrow";
 
@@ -38,10 +38,11 @@ export function Locked({ locked, hideControls }: { locked: ILocked; hideControls
 
   return (
     <SuiObjectDisplay object={suiObject?.data?.data!} label={getLabel()} labelClasses={getLabelClasses()}>
-      <div className="p-4 pt-1 text-right flex flex-wrap items-center justify-between">
+      <Flex align="center" justify="space-between" className="pb-1">
         <ExplorerLink id={locked.objectId} isAddress={false} />
         {!hideControls && isOwner() && (
           <Button
+            type="primary"
             icon={<UnlockOutlined />}
             disabled={isPending}
             onClick={() => {
@@ -57,6 +58,7 @@ export function Locked({ locked, hideControls }: { locked: ILocked; hideControls
         )}
         {!hideControls && !isOwner() && (
           <Button
+            type="primary"
             icon={isToggled ? <ArrowUpOutlined /> : <ArrowDownOutlined />}
             disabled={!address}
             onClick={() => setIsToggled(!isToggled)}
@@ -69,7 +71,7 @@ export function Locked({ locked, hideControls }: { locked: ILocked; hideControls
             <CreateEscrow locked={locked} />
           </div>
         )}
-      </div>
+      </Flex>
     </SuiObjectDisplay>
   );
 }

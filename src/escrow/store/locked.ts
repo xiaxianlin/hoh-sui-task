@@ -15,6 +15,11 @@ export const saveLocked = async (locked: Locked) => {
   }
 };
 
-export const queryLocked = async ({}: LockedListingQuery): Promise<Locked[]> => {
-  return [];
+export const queryLocked = async ({
+  deleted = "false",
+}: LockedListingQuery): Promise<{ cursor?: string | null; data: Locked[] }> => {
+  return {
+    cursor: null,
+    data: await db.locked.where("deleted").equals(deleted).toArray(),
+  };
 };
