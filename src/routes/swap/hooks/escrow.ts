@@ -5,7 +5,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useTransactionExecution } from "./sui";
 import { ESCROW_PACKAGE_ID } from "@/constants";
 import { Escrow, Locked } from "@/escrow/store/db";
-import { useAppModel } from "@/models/app.model";
+import { useAppModel } from "@/models/app-model";
 import { QueryKey } from "../constants";
 
 export function useCreateEscrowMutation() {

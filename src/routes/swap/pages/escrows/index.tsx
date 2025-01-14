@@ -2,7 +2,7 @@ import { InfoCircleOutlined } from "@ant-design/icons";
 import { Flex, Tabs, TabsProps, Tooltip } from "antd";
 import { FC, useMemo } from "react";
 import { EscrowList } from "../../components/EscrowList";
-import { useAppModel } from "@/models/app.model";
+import { useAppModel } from "@/models/app-model";
 import { LockedList } from "../../components/LockedList";
 
 const TabeLabel: FC<{ label: string; tooltip?: string }> = ({ label, tooltip }) => {

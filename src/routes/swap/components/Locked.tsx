@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Locked as ILocked } from "@/escrow/store/db";
 import { useGetObject, useUnlockMutation } from "../hooks";
-import { useAppModel } from "@/models/app.model";
+import { useAppModel } from "@/models/app-model";
 import { ExplorerLink, SuiObjectDisplay } from "@/components";
 import { Button, Flex } from "antd";
 import { ArrowDownOutlined, ArrowUpOutlined, UnlockOutlined } from "@ant-design/icons";

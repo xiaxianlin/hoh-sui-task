@@ -1,6 +1,6 @@
 import { useSuiClientQuery } from "@mysten/dapp-kit";
 import { Card, Flex } from "antd";
-import { useAppModel } from "../../models/app.model";
+import { useAppModel } from "../../models/app-model";
 import { balance } from "../../utils/format";
 
 export function Balance() {

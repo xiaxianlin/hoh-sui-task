@@ -1,6 +1,6 @@
 import { getFaucetHost, requestSuiFromFaucetV0 } from "@mysten/sui/faucet";
 import { Button, Card, Form, Input, message } from "antd";
-import { useConfigModel } from "../../models/config.model";
+import { useConfigModel } from "../../models/config-model";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 

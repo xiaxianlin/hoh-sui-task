@@ -3,7 +3,7 @@ import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import { useGenerateDemoData } from "./hooks/demo";
 import { useEffect, useState } from "react";
 import { startListeners, stopListeners } from "@/escrow/indexer/event-indexer";
-import { useConfigModel } from "@/models/config.model";
+import { useConfigModel } from "@/models/config-model";
 
 export default function SwapRoot() {
   const [id, setId] = useState(1);

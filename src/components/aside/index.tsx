@@ -1,6 +1,6 @@
 import "./index.less";
 import { Layout, Menu, MenuProps } from "antd";
-import { useConfigModel } from "../../models/config.model";
+import { useConfigModel } from "../../models/config-model";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useMemo } from "react";
 import {

@@ -2,7 +2,7 @@ import { useSuiClientInfiniteQuery } from "@mysten/dapp-kit";
 import { LockedObject } from "./LockedObject";
 import { CONSTRACT } from "../constants";
 import { InfiniteScrollArea } from "@/components";
-import { useAppModel } from "@/models/app.model";
+import { useAppModel } from "@/models/app-model";
 
 export function MyLockedObejcts() {
   const { address } = useAppModel();

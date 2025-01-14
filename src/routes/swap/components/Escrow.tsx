@@ -1,5 +1,5 @@
 import { Escrow as IEscrow } from "@/escrow/store/db";
-import { useAppModel } from "@/models/app.model";
+import { useAppModel } from "@/models/app-model";
 import { useState } from "react";
 import { useAcceptEscrowMutation, useCancelEscrowMutation, useGetObject } from "../hooks";
 import { useQuery } from "@tanstack/react-query";

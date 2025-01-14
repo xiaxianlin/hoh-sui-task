@@ -5,7 +5,7 @@ import { useCreateEscrowMutation } from "../hooks";
 import { Locked } from "@/escrow/store/db";
 import { ExplorerLink } from "@/components";
 import { Avatar, Button, Flex, Select, Typography } from "antd";
-import { useAppModel } from "@/models/app.model";
+import { useAppModel } from "@/models/app-model";
 
 export function CreateEscrow({ locked }: { locked: Locked }) {
   const { address } = useAppModel();

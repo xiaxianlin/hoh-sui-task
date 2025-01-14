@@ -1,42 +1,37 @@
-import { useSuiClientQuery } from "@mysten/dapp-kit";
-import { Alert, Card, Spin } from "antd";
-import { TASK_SHARE_STATE_ID } from "../../constants";
-import CreateProfile from "./components/create-profile";
+import { Col, Flex, Row, Spin } from "antd";
+import { CoinList } from "@/routes/task/views/coin-list";
+import { Folder } from "@/routes/task/views/folder";
+import { Profile } from "@/routes/task/views/profile";
+import { TaskModel, useTaskModel } from "./model";
+function TaskContent() {
+  const { loading } = useTaskModel();
 
-export default function Task() {
-  const { data, isPending, refetch, error } = useSuiClientQuery("getObject", {
-    id: TASK_SHARE_STATE_ID,
-    options: {
-      showContent: true,
-    },
-  });
-
-  console.log(data);
-
-  if (isPending) {
+  if (loading) {
     return (
-      <Card title="Profle" style={{ width: "50%", margin: "0 auto" }}>
+      <Flex justify="center" align="center" className="h-[50%]">
         <Spin spinning />
-      </Card>
+      </Flex>
     );
   }
-
-  const isError = !!error || !!data.error;
-
   return (
-    <Card title="Profle" style={{ width: "50%", margin: "0 auto" }}>
-      {isError && (
-        <Alert
-          showIcon
-          type="error"
-          message={TASK_SHARE_STATE_ID + " " + data?.error?.code}
-          style={{ marginBottom: 20 }}
-        />
-      )}
-      <CreateProfile
-        onCreate={() => refetch()}
-        disabled={isPending || isError}
-      />
-    </Card>
+    <Flex vertical gap={20}>
+      <Row gutter={20}>
+        <Col span={12}>
+          <Profile />
+        </Col>
+        <Col span={12}>
+          <Folder />
+        </Col>
+      </Row>
+      <CoinList />
+    </Flex>
+  );
+}
+
+export default function Task() {
+  return (
+    <TaskModel.Provider>
+      <TaskContent />
+    </TaskModel.Provider>
   );
 }

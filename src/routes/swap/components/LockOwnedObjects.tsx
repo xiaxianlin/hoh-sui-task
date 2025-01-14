@@ -3,7 +3,7 @@ import { useLockObjectMutation } from "../hooks";
 import { InfiniteScrollArea, SuiObjectDisplay } from "@/components";
 import { Button, Flex } from "antd";
 import { LockOutlined } from "@ant-design/icons";
-import { useAppModel } from "@/models/app.model";
+import { useAppModel } from "@/models/app-model";
 
 export function LockOwnedObjects() {
   const { address } = useAppModel();

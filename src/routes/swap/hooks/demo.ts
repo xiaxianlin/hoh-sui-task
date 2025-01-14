@@ -1,7 +1,7 @@
 import { Transaction } from "@mysten/sui/transactions";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useTransactionExecution } from "./sui";
-import { useAppModel } from "@/models/app.model";
+import { useAppModel } from "@/models/app-model";
 import { ESCROW_PACKAGE_ID } from "@/constants";
 import { QueryKey } from "../constants";
 

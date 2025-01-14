@@ -3,7 +3,7 @@ import Home from "./routes/home";
 import Root from "./routes/root";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import Task from "./routes/task";
-import { AppModel } from "./models/app.model";
+import { AppModel } from "./models/app-model";
 import Transfer from "./routes/transfer";
 import Faucet from "./routes/water-faucet";
 import Counter from "./routes/counter";

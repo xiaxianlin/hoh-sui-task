@@ -1,9 +1,9 @@
 import { Balance } from "./Balance";
 import { getFullnodeUrl } from "@mysten/sui/client";
 import { Card, Flex } from "antd";
-import { useAppModel } from "../../models/app.model";
+import { useAppModel } from "../../models/app-model";
 import OwnedObjects from "./OwnedObjects";
-import { useConfigModel } from "../../models/config.model";
+import { useConfigModel } from "../../models/config-model";
 
 export default function Account() {
   const { env } = useConfigModel();

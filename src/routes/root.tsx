@@ -1,8 +1,8 @@
 import { ConnectButton } from "@mysten/dapp-kit";
 import { Flex, Layout, Select, theme } from "antd";
 import { Outlet } from "react-router-dom";
-import { useAppModel } from "../models/app.model";
-import { useConfigModel } from "../models/config.model";
+import { useAppModel } from "../models/app-model";
+import { useConfigModel } from "../models/config-model";
 import { Aside } from "@/components/aside";
 
 export default function Root() {

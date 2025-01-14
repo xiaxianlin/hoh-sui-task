@@ -2,7 +2,7 @@ import {
   useSignAndExecuteTransaction,
   useSuiClientQuery,
 } from "@mysten/dapp-kit";
-import { useAppModel } from "../../models/app.model";
+import { useAppModel } from "../../models/app-model";
 import { USDC_TYPE } from "../../constants";
 import { Transaction } from "@mysten/sui/transactions";
 import { Form, message } from "antd";
