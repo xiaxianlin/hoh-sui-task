@@ -1,10 +1,8 @@
+import { CoinMetadata } from "@mysten/sui/client";
+
 export type ObjectId = string;
 export type Address = string;
-
-export type ProfileCreatedData = {
-  owner: Address;
-  profile: ObjectId;
-};
+export type Cursor = string | null | undefined;
 
 export type Profile = {
   id: {
@@ -21,4 +19,13 @@ export type Folder = {
   };
   name: string;
   description: string;
+};
+
+export type Coin = {
+  id: {
+    id: ObjectId;
+  };
+  balance: string;
+  type: string;
+  metadata: CoinMetadata;
 };

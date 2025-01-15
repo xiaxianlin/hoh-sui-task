@@ -2,6 +2,7 @@ import { useSignAndExecuteTransaction } from "@mysten/dapp-kit";
 import { Button, Form, FormProps, Input, message } from "antd";
 import { Transaction } from "@mysten/sui/transactions";
 import { useTaskModel } from "@/routes/task/model";
+import { TASK_PACKAGE_ID } from "../constantas";
 
 type FieldType = {
   name: string;
@@ -9,7 +10,7 @@ type FieldType = {
 };
 
 export default function FolderForm({ onCreate }: { onCreate?: (digest?: string) => void }) {
-  const { profile, packageId } = useTaskModel();
+  const { profile } = useTaskModel();
   const { mutate, isPending } = useSignAndExecuteTransaction({
     onSuccess: () => {
       onCreate?.();
@@ -23,7 +24,7 @@ export default function FolderForm({ onCreate }: { onCreate?: (digest?: string) 
   const onFinish: FormProps<FieldType>["onFinish"] = (values) => {
     const tx = new Transaction();
     tx.moveCall({
-      target: `${packageId}::week_two::create_folder`,
+      target: `${TASK_PACKAGE_ID}::week_two::create_folder`,
       arguments: [tx.pure.string(values.name!), tx.pure.string(values.description!), tx.object(profile?.id.id!)],
     });
     mutate({ transaction: tx });

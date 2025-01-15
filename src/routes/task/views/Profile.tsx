@@ -5,7 +5,7 @@ import { useBoolean } from "ahooks";
 import { Button, Card, Empty, Form, Modal } from "antd";
 
 export function Profile() {
-  const { profile } = useTaskModel();
+  const { profile, refresh } = useTaskModel();
   const [visible, { setTrue, setFalse }] = useBoolean(false);
 
   return (
@@ -28,6 +28,7 @@ export function Profile() {
         <ProfileForm
           onCreate={() => {
             setFalse();
+            refresh();
           }}
         />
       </Modal>

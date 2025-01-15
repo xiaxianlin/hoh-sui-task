@@ -5,7 +5,7 @@ import { useBoolean } from "ahooks";
 import { Button, Card, Empty, Form, Modal, Select } from "antd";
 
 export function Folder() {
-  const { folder, folders = [], setFolder, refetch } = useTaskModel();
+  const { profile, folder, folders = [], setFolder, refresh } = useTaskModel();
   const [visible, { setTrue, setFalse }] = useBoolean(false);
 
   return (
@@ -13,7 +13,7 @@ export function Folder() {
       <Card
         title="Folder"
         className="h-full"
-        extra={<Button size="small" icon={<PlusOutlined />} type="primary" onClick={setTrue} />}
+        extra={profile ? <Button size="small" icon={<PlusOutlined />} type="primary" onClick={setTrue} /> : undefined}
       >
         {folders?.length ? (
           <>
@@ -31,8 +31,12 @@ export function Folder() {
               ))}
             </Select>
             <Form className="mt-3">
-              <Form.Item label="name" className="mb-2">{folder?.name}</Form.Item>
-              <Form.Item label="description" className="mb-2">{folder?.description}</Form.Item>
+              <Form.Item label="name" className="mb-2">
+                {folder?.name}
+              </Form.Item>
+              <Form.Item label="description" className="mb-2">
+                {folder?.description}
+              </Form.Item>
             </Form>
           </>
         ) : (
@@ -42,7 +46,8 @@ export function Folder() {
       <Modal centered title="Create Folder" open={visible} onCancel={setFalse} footer={null}>
         <FolderForm
           onCreate={() => {
-            setFalse(), refetch();
+            setFalse();
+            refresh();
           }}
         />
       </Modal>

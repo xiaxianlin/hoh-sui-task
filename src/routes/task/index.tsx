@@ -1,7 +1,7 @@
 import { Col, Flex, Row, Spin } from "antd";
-import { CoinList } from "@/routes/task/views/coin-list";
-import { Folder } from "@/routes/task/views/folder";
-import { Profile } from "@/routes/task/views/profile";
+import { CoinList } from "@/routes/task/views/CoinList";
+import { Folder } from "@/routes/task/views/Folder";
+import { Profile } from "@/routes/task/views/Profile";
 import { TaskModel, useTaskModel } from "./model";
 function TaskContent() {
   const { loading } = useTaskModel();
