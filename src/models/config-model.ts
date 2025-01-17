@@ -5,7 +5,7 @@ import { useMemo, useState } from "react";
 import { QueryClient } from "@tanstack/react-query";
 
 const useContainer = () => {
-  const [env, setEnv] = useState<"devnet" | "testnet" | "mainnet">("testnet");
+  const [env, setEnv] = useState<"devnet" | "testnet" | "mainnet">("devnet");
   const queryClient = useMemo(() => new QueryClient(), []);
 
   const config = useMemo(

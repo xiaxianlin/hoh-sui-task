@@ -9,6 +9,7 @@ import Counter from "./routes/counter";
 import SwapRoot from "./routes/swap/root";
 import Escrows from "./routes/swap/pages/escrows";
 import Locked from "./routes/swap/pages/locked";
+import Guess from "./routes/guess";
 
 export default function App() {
   return (
@@ -21,11 +22,13 @@ export default function App() {
             <Route path="transfer" element={<Transfer />} />
             <Route path="faucet" element={<Faucet />} />
             <Route path="counter" element={<Counter />} />
+            <Route path="counter" element={<Counter />} />
             <Route path="swap" element={<SwapRoot />}>
               <Route index element={<Navigate to="escrows" />} />
               <Route path="escrows" element={<Escrows />} />
               <Route path="locked" element={<Locked />} />
             </Route>
+            <Route path="guess" element={<Guess />} />
           </Route>
         </Routes>
       </BrowserRouter>

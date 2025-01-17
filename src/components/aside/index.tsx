@@ -8,6 +8,7 @@ import {
   ControlOutlined,
   FieldNumberOutlined,
   SnippetsOutlined,
+  StrikethroughOutlined,
   SwapOutlined,
   TransactionOutlined,
 } from "@ant-design/icons";
@@ -32,6 +33,7 @@ const items: MenuItem[] = [
     children: [
       { key: "/counter", label: "Counter", icon: <FieldNumberOutlined /> },
       { key: "/swap", label: "Swap", icon: <SwapOutlined /> },
+      { key: "/guess", label: "Guess", icon: <StrikethroughOutlined /> },
     ],
   },
 ];
